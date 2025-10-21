@@ -1,18 +1,23 @@
-{
-  "tasks": [
+[
     {
-      "id": 1,
-      "title": "Comprar pan",
-      "description": "Comprar pan en la tienda",
-      "due_date": "2025-10-14",
-      "completed": false
+        "id": 2,
+        "title": "Tareita",
+        "description": "No comprar nada",
+        "dueDate": "2025-10-14",
+        "completed": false
     },
     {
-      "id": 2,
-      "title": "Estudiar PHP",
-      "description": "Estudiar PHP para el examen",
-      "due_date": "2025-10-15",
-      "completed": true
+        "id": 3,
+        "title": "Tareita",
+        "description": "No comprar nada",
+        "dueDate": "2025-10-14",
+        "completed": false
+    },
+    {
+        "id": 4,
+        "title": "Tareita",
+        "description": "No comprar nada",
+        "dueDate": "2025-10-14",
+        "completed": false
     }
-  ]
-}
+]
