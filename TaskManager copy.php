@@ -48,7 +48,7 @@ function addTask(){
         $last_item    = end($data);
         $last_item_id = $last_item['id'];
 
-        $data['tasks'] = array(
+        $data[] = array(
             'id' => ++$last_item_id,
             'title' => $argv[2],
             'description' => $argv[3],
@@ -104,14 +104,13 @@ function editTask(){
     {   
         $data = json_decode(fread($fp, $filesize), true);
 
-        foreach($data['tasks'] as $item){
-            echo 'hola';
+        foreach($data as $item){
             if($item['id'] == $argv[2]){
-                $item['id'] = $argv[2];
-                $item['title'] = $argv[3];
-                $item['description'] = $argv[4];
-                $item['dueDate'] = $argv[5];
-                $item['completed'] = false;
+                $data['id'] = $argv[2];
+                $data['title'] = $argv[3];
+                $data['description'] = $argv[4];
+                $data['dueDate'] = $argv[5];
+                $data['completed'] = false;
             }
         }
         
@@ -128,32 +127,7 @@ function editTask(){
 }
 
 function listTask(){
-     global $fp;
-    global $filesize;
-    global $fp;
-    global $argv;
-
-    if (flock($fp, LOCK_EX))
-    {   
-        $data = json_decode(fread($fp, $filesize), true);
-
-        foreach($data['tasks'] as $item){
-
-            $status = $item['completed'] ? 'true' : 'false';
-
-             echo  PHP_EOL.'Task with Id: ' . $item['id'] . PHP_EOL.
-                'Title: '.$item['title']. PHP_EOL.
-                'Description: '.$item['description'] . PHP_EOL.
-                'Date: '.$item['due_date']. PHP_EOL.
-                'Status: '.$status . PHP_EOL;
-            
-        }
-    }else{
-        echo "Unable to lock file";
-    }
-    fclose($fp);
-    
+     
 }
-
 
 ?>
