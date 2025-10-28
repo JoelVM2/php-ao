@@ -36,6 +36,8 @@ function initialize(){
 
 }
 
+// hacer que funcione esta bazofia con tasks, y que no modifique esa parte del json
+
 function addTask(){
     global $fp;
     global $filesize;
@@ -136,17 +138,13 @@ function listTask(){
     if (flock($fp, LOCK_EX))
     {   
         $data = json_decode(fread($fp, $filesize), true);
-
         foreach($data['tasks'] as $item){
-
             $status = $item['completed'] ? 'true' : 'false';
-
              echo  PHP_EOL.'Task with Id: ' . $item['id'] . PHP_EOL.
                 'Title: '.$item['title']. PHP_EOL.
                 'Description: '.$item['description'] . PHP_EOL.
                 'Date: '.$item['due_date']. PHP_EOL.
                 'Status: '.$status . PHP_EOL;
-            
         }
     }else{
         echo "Unable to lock file";
