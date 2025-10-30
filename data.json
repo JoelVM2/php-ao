@@ -3,35 +3,21 @@
         "id": 1,
         "title": "Tareita",
         "description": "No comprar nada",
-        "dueDate": "2025-10-14",
+        "due_date": "2025-10-14",
         "completed": true
     },
     {
         "id": 2,
-        "title": "Tareita",
-        "description": "No comprar nada",
-        "dueDate": "2025-10-14",
+        "title": "Tareita2",
+        "description": "Comprar",
+        "due_date": "2025-10-24",
         "completed": true
     },
     {
         "id": 3,
         "title": "Tarea",
         "description": "Comprar Todo",
-        "dueDate": "2025-10-28",
-        "completed": false
-    },
-    {
-        "id": 4,
-        "title": "Tareita",
-        "description": "No comprar nada",
-        "dueDate": "2025-10-14",
-        "completed": true
-    },
-    {
-        "id": 5,
-        "title": "Tareita",
-        "description": "No comprar nada",
-        "dueDate": "2025-10-14",
+        "due_date": "2025-10-28",
         "completed": false
     }
 ]
