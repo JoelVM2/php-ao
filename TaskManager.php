@@ -215,7 +215,7 @@ function taskCompleted(){
  * 
  */
 function argumentsList(){
-    echo 'Use: ' . PHP_EOL . 'add <title> <description> <due_date> to add a new task' . PHP_EOL .PHP_EOL . 'edit <id> <title> <description> <due_date> to edit a task' . PHP_EOL .PHP_EOL . 
-    'delete <id> to delete per id / delete all to remove all the tasks' . PHP_EOL .PHP_EOL . 'list to list all the tasks / list <id> to list a task per id / list --completed to list completed tasks' 
-    . PHP_EOL .PHP_EOL . 'complete <id> to complete a task'.PHP_EOL;
+    echo 'Use: ' . PHP_EOL . ' add <title> <description> <due_date> to add a new task' . PHP_EOL .PHP_EOL . ' edit <id> <title> <description> <due_date> to edit a task' . PHP_EOL .PHP_EOL . 
+    ' delete <id> to delete per id / delete all to remove all the tasks' . PHP_EOL .PHP_EOL . ' list to list all the tasks / list <id> to list a task per id / list --completed to list completed tasks' 
+    . PHP_EOL .PHP_EOL . ' complete <id> to complete a task'.PHP_EOL;
 }
