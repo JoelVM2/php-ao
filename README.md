@@ -27,12 +27,10 @@ Toda la información se almacena en el archivo `data.json`, que actúa como base
 Antes de ejecutar el proyecto, asegúrate de tener instalado:
 
 - **PHP 8.0 o superior**  
-- **PowerShell** o **CMD** (en Windows)  
+- **PowerShell** o **CMD** 
 - Archivos `TaskManager.php` y `data.json` en el mismo directorio
 
 El archivo `data.json` debe tener formato JSON válido.  
-Ejemplo de contenido inicial:
-
 ```json
 [
     {
