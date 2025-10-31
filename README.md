@@ -5,7 +5,6 @@ El sistema guarda la información en un archivo `data.json`, que se actualiza au
 
 Con esta herramienta podrás **añadir**, **editar**, **listar**, **eliminar** y **marcar como completadas** tus tareas directamente desde la terminal.
 
----
 
 ## Descripción del Proyecto
 
@@ -20,7 +19,6 @@ Cada tarea contiene los siguientes campos:
 
 Toda la información se almacena en el archivo `data.json`, que actúa como base de datos local.
 
----
 
 ## Requisitos Previos
 
@@ -42,7 +40,6 @@ El archivo `data.json` debe tener formato JSON válido.
     }
 ]
 ```
---- 
 ## Ejecución del Programa
 
 Desde la terminal o PowerShell, navega hasta el directorio del proyecto y ejecuta los comandos con:
