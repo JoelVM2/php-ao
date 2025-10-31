@@ -3,10 +3,12 @@ $filename = "data.json";
 $filesize = filesize($filename);
 $fp       = fopen($filename, "r+");
 
+// Inicia el gestor de tareas
 initialize();
 
 /**
- * 
+ * Función principal que determina la acción a ejecutar
+ * según el argumento recibido por consola.
  */
 function initialize()
 {
@@ -16,19 +18,19 @@ function initialize()
         case 'add':
             addTask();
             break;
-        case 'delete';
+        case 'delete':
             deleteTask();
             break;
-        case 'edit';
+        case 'edit':
             editTask();
             break;
-        case 'list';
+        case 'list':
             listTask();
             break;
-        case 'complete';
+        case 'complete':
             taskCompleted();
             break;
-        case 'help';
+        case 'help':
             argumentsList();
             break;
         default:
@@ -38,7 +40,15 @@ function initialize()
 }
 
 /**
+ * Añade una nueva tarea al archivo JSON.
  * 
+ * Usa los argumentos:
+ *  $argv[2] = título
+ *  $argv[3] = descripción
+ *  $argv[4] = fecha de vencimiento
+ * 
+ * Crea un nuevo objeto con un ID autoincrementado
+ * y lo guarda en el archivo data.json.
  */
 function addTask()
 {
@@ -50,8 +60,8 @@ function addTask()
         $data = json_decode(fread($fp, $filesize), true);
         $last_item    = end($data);
         $last_item_id = $last_item['id'];
-
-        $data['tasks'] = array(
+        // Crea una nueva tarea
+        $data[] = array(
             'id' => ++$last_item_id,
             'title' => $argv[2],
             'description' => $argv[3],
@@ -59,6 +69,7 @@ function addTask()
             'completed' => false
         );
         echo "Task created.";
+        // Guarda el archivo con el nuevo contenido
         $data = array_values($data);
         fseek($fp, 0);
         ftruncate($fp, 0);
@@ -71,7 +82,13 @@ function addTask()
     
 }
 /**
+ * Elimina una tarea del archivo JSON.
  * 
+ * Usa los argumentos:
+ *  $argv[2] = id de la tarea o la palabra 'all'
+ * 
+ * Si el argumento es 'all', elimina todas las tareas.
+ * Si es un número, elimina solo la tarea con ese ID.
  */
 function deleteTask()
 {
@@ -94,7 +111,7 @@ function deleteTask()
             }
             $count++;
         }
-
+        // Guarda los cambios
         $data = array_values($data);
         fseek($fp, 0);
         ftruncate($fp, 0);
@@ -106,7 +123,15 @@ function deleteTask()
     fclose($fp);
 }
 /**
+ * Edita una tarea existente.
  * 
+ * Usa los argumentos:
+ *  $argv[2] = id de la tarea
+ *  $argv[3] = nuevo título
+ *  $argv[4] = nueva descripción
+ *  $argv[5] = nueva fecha de vencimiento
+ * 
+ * Modifica los datos de la tarea especificada y guarda los cambios.
  */
 function editTask()
 {
@@ -126,6 +151,7 @@ function editTask()
                 $item['completed'] = false;
             }
         }
+        // Guarda los cambios
         fseek($fp, 0);
         ftruncate($fp, 0);
         fwrite($fp, json_encode($data, JSON_PRETTY_PRINT));
@@ -137,7 +163,12 @@ function editTask()
     echo "Task modified";
 }
 /**
+ * Lista las tareas almacenadas en el archivo JSON.
  * 
+ * Puede recibir los siguientes argumentos:
+ *  - Sin argumentos: lista todas las tareas
+ *  - <id>: muestra solo la tarea con ese ID
+ *  - --completed: muestra solo las tareas completadas
  */
 function listTask()
 {
@@ -145,7 +176,7 @@ function listTask()
     global $filesize;
     global $argv;
     $data = json_decode(fread($fp, $filesize), true);
-
+    // Listar solo completadas
     if($argv[2] == '--completed'){
         echo 'hola';
         foreach ($data as $item) {
@@ -155,7 +186,8 @@ function listTask()
         }
         return;
     }
-    if (!$argv[2] == null) {
+    // Listar por ID específico
+    if (!empty($argv[2])) {
        
         foreach ($data as $item) {
             if ($item['id'] == $argv[2]) {
@@ -164,7 +196,7 @@ function listTask()
         }
         return;
     }
- 
+     // Listar todas
     foreach ($data as $item) {
         listJson($item);
     }
@@ -172,7 +204,9 @@ function listTask()
 }
 
 /**
+ * Muestra una tarea formateada en texto legible.
  * 
+ * @param array $item La tarea a mostrar.
  */
 function listJson($item)
 {
@@ -185,7 +219,12 @@ function listJson($item)
 }
 
 /**
+ * Marca una tarea como completada.
  * 
+ * Usa el argumento:
+ *  $argv[2] = id de la tarea a marcar como completada
+ * 
+ * Cambia el campo "completed" a true en el archivo JSON.
  */
 function taskCompleted(){
     global $fp;
@@ -200,6 +239,7 @@ function taskCompleted(){
             }
         }
         echo 'Task completed!';
+        // Guarda el archivo actualizado
         $data = array_values($data);
         fseek($fp, 0);
         ftruncate($fp, 0);
@@ -212,7 +252,10 @@ function taskCompleted(){
 }
 
 /**
+ * Muestra una guía de uso del programa.
  * 
+ * Explica los diferentes comandos disponibles
+ * y su sintaxis.
  */
 function argumentsList(){
     echo 'Use: ' . PHP_EOL . ' add <title> <description> <due_date> to add a new task' . PHP_EOL .PHP_EOL . ' edit <id> <title> <description> <due_date> to edit a task' . PHP_EOL .PHP_EOL . 
